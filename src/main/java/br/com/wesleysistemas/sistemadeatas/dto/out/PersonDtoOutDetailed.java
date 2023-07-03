@@ -5,14 +5,14 @@ import br.com.wesleysistemas.sistemadeatas.enums.Sector;
 import lombok.Data;
 
 @Data
-public class PersonDtoOutDetailedSignUp {
+public class PersonDtoOutDetailed {
     private Long id;
     private String nome;
     private String cpf;
     private String email;
     private Sector setor;
 
-    public PersonDtoOutDetailedSignUp(Person person) {
+    public PersonDtoOutDetailed(Person person) {
         this.id = person.getId();
         this.nome = person.getNome();
         this.cpf = person.getCpf();

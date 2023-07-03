@@ -1,6 +1,7 @@
 package br.com.wesleysistemas.sistemadeatas.service;
 
 import br.com.wesleysistemas.sistemadeatas.dto.in.CpfDtoInDataThirdPartyAPI;
+import br.com.wesleysistemas.sistemadeatas.interfaces.Messages;
 import com.google.gson.Gson;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -26,8 +27,7 @@ public class CpfValidatorService {
                 return Objects.equals(cpfDtoInDataThirdPartyAPI.getValid().trim().toLowerCase(), "true");
             }
         } catch (Exception e) {
-            throw new RuntimeException("Falha na consulta da API externa!");
-
+            throw new RuntimeException(Messages.THIRD_PARTY_SERVICE_FAILED);
         }
         return false;
     }
