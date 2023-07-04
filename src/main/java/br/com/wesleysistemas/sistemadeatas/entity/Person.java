@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 @Table(name = "pessoas")
 @Entity(name = "Pessoa")
 @Data
+@EqualsAndHashCode(of = "id")
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = "id")
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
