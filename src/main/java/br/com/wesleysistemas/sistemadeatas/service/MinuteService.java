@@ -18,12 +18,16 @@ public class MinuteService {
     private MinuteRepository repository;
     @Autowired
     private PersonRepository personRepository;
+    @Autowired
+    private ValidatorDuplicatedMinute validatorDuplicatedMinute;
+    @Autowired
+    private ValidatorListPeopleIfAllExists validatorListPeopleIfAllExists;
 
     public MinuteDtoOutDataRegister register(MinuteDtoInDataRegister data){
         Minute minute = new Minute(data.title(), data.date(), data.locale(), data.schedule(),
                 data.decisions(), data.responsibilities(), data.summary());
-        new ValidatorListPeopleIfAllExists().validation(data.peopleIds(), personRepository);
-        new ValidatorDuplicatedMinute().validation(minute, repository);
+        validatorListPeopleIfAllExists.validation(data.peopleIds(), personRepository);
+        validatorDuplicatedMinute.validation(minute, repository);
         minute.setPeople(new ArrayList<>());
         data.peopleIds().forEach(personId -> minute.getPeople()
                 .add(personRepository.getReferenceById(personId)));
