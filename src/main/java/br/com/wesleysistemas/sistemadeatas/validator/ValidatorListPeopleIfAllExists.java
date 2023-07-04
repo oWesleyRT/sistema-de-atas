@@ -8,8 +8,8 @@ import java.util.List;
 
 @Component
 public class ValidatorListPeopleIfAllExists implements Validator {
-    public void validation(List<Long> data, PersonRepository personRepository) {
-        for(Long id : data){
+    public void validation(List<Long> peopleIds, PersonRepository personRepository) {
+        for(Long id : peopleIds){
             if(!personRepository.existsById(id)){
                 throw new PersonDoesntExistsException(id);
             }

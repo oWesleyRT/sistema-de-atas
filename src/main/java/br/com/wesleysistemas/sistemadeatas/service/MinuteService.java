@@ -14,14 +14,20 @@ import java.util.ArrayList;
 
 @Service
 public class MinuteService {
+    private final MinuteRepository repository;
+    private final PersonRepository personRepository;
+    private final ValidatorDuplicatedMinute validatorDuplicatedMinute;
+    private final ValidatorListPeopleIfAllExists validatorListPeopleIfAllExists;
+
     @Autowired
-    private MinuteRepository repository;
-    @Autowired
-    private PersonRepository personRepository;
-    @Autowired
-    private ValidatorDuplicatedMinute validatorDuplicatedMinute;
-    @Autowired
-    private ValidatorListPeopleIfAllExists validatorListPeopleIfAllExists;
+    public MinuteService(MinuteRepository repository, PersonRepository personRepository,
+                         ValidatorDuplicatedMinute validatorDuplicatedMinute, ValidatorListPeopleIfAllExists validatorListPeopleIfAllExists){
+        this.repository = repository;
+        this.personRepository = personRepository;
+        this.validatorListPeopleIfAllExists = validatorListPeopleIfAllExists;
+        this.validatorDuplicatedMinute = validatorDuplicatedMinute;
+
+    }
 
     public MinuteDtoOutDataRegister register(MinuteDtoInDataRegister data){
         Minute minute = new Minute(data.title(), data.date(), data.locale(), data.schedule(),
