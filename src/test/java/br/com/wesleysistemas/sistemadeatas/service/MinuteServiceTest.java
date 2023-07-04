@@ -7,15 +7,12 @@ import br.com.wesleysistemas.sistemadeatas.repository.MinuteRepository;
 import br.com.wesleysistemas.sistemadeatas.repository.PersonRepository;
 import br.com.wesleysistemas.sistemadeatas.validator.ValidatorDuplicatedMinute;
 import br.com.wesleysistemas.sistemadeatas.validator.ValidatorListPeopleIfAllExists;
-import org.apache.http.util.Asserts;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.util.Assert;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -33,18 +30,19 @@ class MinuteServiceTest {
     private ValidatorDuplicatedMinute validatorDuplicatedMinute;
 
     @Test
+    @DisplayName("Return a MinuteDtoIn and need save Minute on BD")
     public void register() {
         MinuteService service = new MinuteService(minuteRepository, personRepository, validatorDuplicatedMinute,
                 validatorListPeopleIfAllExists);
         MinuteDtoInDataRegister minuteDtoIn = createMinuteDtoIn();
-        var validatorListPeopleIfAllExists = Mockito.mock(ValidatorListPeopleIfAllExists.class);
         Mockito.when(personRepository.existsById(Mockito.anyLong()))
                         .thenReturn(true);
-        Mockito.when(minuteRepository.existsByTitleAndDateAndLocale(Mockito.any(), Mockito.any(), Mockito.any()))
-                .thenReturn(false);
+        //Mockito.when(minuteRepository.existsByTitleAndDateAndLocale(Mockito.any(), Mockito.any(), Mockito.any()))
+        //        .thenReturn(false);
         MinuteDtoOutDataRegister minuteDtoOut = service.register(minuteDtoIn);
 
-        Assert.isInstanceOf(MinuteDtoOutDataRegister.class, minuteDtoOut);
+        Assertions.assertInstanceOf(MinuteDtoOutDataRegister.class, minuteDtoOut);
+        Mockito.verify(minuteRepository).save(Mockito.any(Minute.class));
     }
 
     public MinuteDtoInDataRegister createMinuteDtoIn(){
