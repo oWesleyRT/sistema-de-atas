@@ -2,6 +2,7 @@ package br.com.wesleysistemas.sistemadeatas.dto.in;
 
 import br.com.wesleysistemas.sistemadeatas.enums.Sector;
 import br.com.wesleysistemas.sistemadeatas.exception.InvalidCpfThirdPartyAPIException;
+import br.com.wesleysistemas.sistemadeatas.interfaces.Messages;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -24,7 +25,7 @@ public class PersonDtoInDataSignUp {
 
     public String getCpf() {
         if (cpf.length() != 11) {
-            throw new InvalidCpfThirdPartyAPIException("O FORMATO DO CPF É INVALIDO!");
+            throw new InvalidCpfThirdPartyAPIException(Messages.CPF_SYNTAX_INVALID);
         }
         return cpf.trim();
     }
