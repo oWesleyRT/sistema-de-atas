@@ -11,7 +11,7 @@ import lombok.Data;
 @Data
 public class PersonDtoInDataSignUp {
     @NotBlank
-    private String nome;
+    private String name;
 
     @NotBlank
     private String cpf;
@@ -21,7 +21,7 @@ public class PersonDtoInDataSignUp {
     private String email;
 
     @NotNull
-    private Sector setor;
+    private Sector sector;
 
     public String getCpf() {
         if (cpf.length() != 11) {

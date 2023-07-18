@@ -7,6 +7,7 @@ import br.com.wesleysistemas.sistemadeatas.repository.MinuteRepository;
 import br.com.wesleysistemas.sistemadeatas.repository.PersonRepository;
 import br.com.wesleysistemas.sistemadeatas.validator.ValidatorDuplicatedMinute;
 import br.com.wesleysistemas.sistemadeatas.validator.ValidatorListPeopleIfAllExists;
+import br.com.wesleysistemas.sistemadeatas.validator.ValidatorMinuteDoestnExist;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -28,17 +29,17 @@ class MinuteServiceTest {
     private ValidatorListPeopleIfAllExists validatorListPeopleIfAllExists;
     @Mock
     private ValidatorDuplicatedMinute validatorDuplicatedMinute;
+    @Mock
+    private ValidatorMinuteDoestnExist validatorMinuteDoestnExist;
 
     @Test
     @DisplayName("Return a MinuteDtoIn and need save Minute on BD")
     public void register() {
         MinuteService service = new MinuteService(minuteRepository, personRepository, validatorDuplicatedMinute,
-                validatorListPeopleIfAllExists);
+                validatorListPeopleIfAllExists, validatorMinuteDoestnExist);
         MinuteDtoInDataRegister minuteDtoIn = createMinuteDtoIn();
         Mockito.when(personRepository.existsById(Mockito.anyLong()))
                         .thenReturn(true);
-        //Mockito.when(minuteRepository.existsByTitleAndDateAndLocale(Mockito.any(), Mockito.any(), Mockito.any()))
-        //        .thenReturn(false);
         MinuteDtoOutDataRegister minuteDtoOut = service.register(minuteDtoIn);
 
         Assertions.assertInstanceOf(MinuteDtoOutDataRegister.class, minuteDtoOut);

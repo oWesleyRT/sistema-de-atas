@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity(name = "Minute")
-@Table(name = "Minutes")
+@Table(name = "minutes")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,7 +24,7 @@ public class Minute {
     private LocalDateTime date;
     private String locale;
     @ManyToMany
-    @JoinColumn(name = "person_id")
+    @JoinColumn(name = "people_id")
     private List<Person> people;
     private String schedule;
     private String decisions;
@@ -41,5 +41,4 @@ public class Minute {
         this.responsibilities = responsibilities;
         this.summary = summary;
     }
-
 }

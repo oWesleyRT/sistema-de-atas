@@ -31,10 +31,10 @@ public class PersonService {
             throw new InvalidCpfThirdPartyAPIException();
         }
         Person person = new Person();
-        person.setNome(data.getNome().trim().replaceAll("\\.", ""));
+        person.setName(data.getName().trim().replaceAll("\\.", ""));
         person.setCpf(data.getCpf().trim().replaceAll("\\.", ""));
         person.setEmail(data.getEmail().trim());
-        person.setSetor(data.getSetor());
+        person.setSector(data.getSector());
         personRepository.save(person);
         return new PersonDtoOutDetailed(person);
     }
@@ -50,13 +50,13 @@ public class PersonService {
     public PersonDtoOutDetailed update(PersonDtoInUpdate data) {
         Person person = personRepository.getReferenceById(data.getId());
         if (data.getNome() != null) {
-            person.setNome(data.getNome());
+            person.setName(data.getNome());
         }
         if (data.getEmail() != null) {
             person.setEmail(data.getEmail());
         }
         if (data.getSetor() != null) {
-            person.setSetor(data.getSetor());
+            person.setSector(data.getSetor());
         }
         personRepository.save(person);
         return new PersonDtoOutDetailed(person);

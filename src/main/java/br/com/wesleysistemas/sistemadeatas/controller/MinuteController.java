@@ -2,14 +2,12 @@ package br.com.wesleysistemas.sistemadeatas.controller;
 
 import br.com.wesleysistemas.sistemadeatas.dto.in.MinuteDtoInDataRegister;
 import br.com.wesleysistemas.sistemadeatas.dto.out.MinuteDtoOutDataRegister;
+import br.com.wesleysistemas.sistemadeatas.dto.out.MinuteDtoOutGetSpecificMinute;
 import br.com.wesleysistemas.sistemadeatas.service.MinuteService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
@@ -26,4 +24,10 @@ public class MinuteController {
         return ResponseEntity.created(uri).body(dtoOut);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<MinuteDtoOutGetSpecificMinute> getSpecific(@PathVariable Long id){
+        MinuteDtoOutGetSpecificMinute dtoOut = service.getSpecific(id);
+
+        return ResponseEntity.ok(dtoOut);
+    }
 }

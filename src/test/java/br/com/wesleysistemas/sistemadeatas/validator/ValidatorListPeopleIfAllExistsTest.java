@@ -8,6 +8,7 @@ import br.com.wesleysistemas.sistemadeatas.repository.PersonRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,12 +22,14 @@ class ValidatorListPeopleIfAllExistsTest {
     @Autowired
     private ValidatorListPeopleIfAllExists validator;
 
+    @Mock
+    private PersonRepository personRepository;
+
     @Test
     @DisplayName("Throw person doesn't exists exception.")
     public void validation(){
         List<Long> peopleIds = new ArrayList<>();
         peopleIds.add(1L);
-        PersonRepository personRepository = Mockito.mock(PersonRepository.class);
         Mockito.when(personRepository.existsById(Mockito.anyLong()))
                 .thenReturn(false);
 

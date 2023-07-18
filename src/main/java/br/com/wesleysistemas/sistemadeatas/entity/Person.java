@@ -8,8 +8,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-@Table(name = "pessoas")
-@Entity(name = "Pessoa")
+@Table(name = "people")
+@Entity(name = "Person")
 @Data
 @EqualsAndHashCode(of = "id")
 @NoArgsConstructor
@@ -18,13 +18,9 @@ public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String nome;
-
+    private String name;
     private String email;
-
     private String cpf;
-
     @Enumerated(EnumType.STRING)
-    private Sector setor;
+    private Sector sector;
 }

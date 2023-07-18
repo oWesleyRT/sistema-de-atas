@@ -30,5 +30,4 @@ public class ExceptionHandler {
     public ResponseEntity<String> personAlreadyExists(PersonAlreadyExistsException ex) {
         return ResponseEntity.badRequest().body(ex.getMessage());
     }
-
 }

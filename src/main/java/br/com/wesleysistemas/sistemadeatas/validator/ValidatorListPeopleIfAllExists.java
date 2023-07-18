@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class ValidatorListPeopleIfAllExists implements Validator {
+public class ValidatorListPeopleIfAllExists {
     public void validation(List<Long> peopleIds, PersonRepository personRepository) {
         for(Long id : peopleIds){
             if(!personRepository.existsById(id)){
